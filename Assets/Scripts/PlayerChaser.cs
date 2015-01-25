@@ -1,6 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
-using System.Collections;
+﻿using UnityEngine;
 
 public class PlayerChaser : MonoBehaviour
 {

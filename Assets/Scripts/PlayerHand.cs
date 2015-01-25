@@ -18,7 +18,5 @@ public class PlayerHand : MonoBehaviour {
       GetComponent<SpriteRenderer>().enabled = handPosition.sqrMagnitude > minimalHandMagnitude;
       GetComponent<SpriteRenderer>().material.SetAlpha(handPosition.sqrMagnitude);
 	   transform.localPosition = handPosition * .5f;
-      Debug.Log(handPosition);
-
 	}
 }
