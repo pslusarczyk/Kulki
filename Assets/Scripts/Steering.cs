@@ -4,6 +4,7 @@ public class Steering : MonoBehaviour
 {
    public float MaxVelocitySqr = 2;
    public float Kick = 240000;
+   
 
 	// Use this for initialization
 	void Start ()
