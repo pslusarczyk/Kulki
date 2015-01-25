@@ -27,7 +27,7 @@ public class PlayerHandColliding : MonoBehaviour {
          _catchedBody.GetComponent<PlayerChaser>().enabled = false;
          var joint = PlayerAnchor.gameObject.AddComponent<DistanceJoint2D>();
          joint.connectedBody = _catchedBody;
-         joint.distance = 1.2f;
+         joint.distance = .9f;
       }
    }
 }
