@@ -147,10 +147,10 @@ TextureImporter:
     - name: prototype_11
       rect:
         serializedVersion: 2
-        x: 322
-        y: 36
-        width: 79
-        height: 62
+        x: 323
+        y: 37
+        width: 63
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
     - name: prototype_12
