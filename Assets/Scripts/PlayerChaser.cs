@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Tools;
+using UnityEngine;
 
 public class PlayerChaser : MonoBehaviour
 {
@@ -41,19 +42,13 @@ public class PlayerChaser : MonoBehaviour
       var x = Mathf.Abs(rigidbody2D.velocity.x) > MaxVelocitySqr && inputAndSpeedSignsAreSameForX ? 0 : xToPlayer;
       var y = Mathf.Abs(rigidbody2D.velocity.y) > MaxVelocitySqr && inputAndSpeedSignsAreSameForY ? 0 : yToPlayer;
       var forceToAdd = new Vector2(x, y).normalized * Kick * Time.fixedDeltaTime * rigidbody2D.mass;
-      FacePlayer(x, y); 
+      this.LookAt2D(x, y); 
       rigidbody2D.AddForce(forceToAdd);
    }
 
    void OnCollisionEnter2D(Collision2D collision)
    {
-      if (collision.relativeVelocity.sqrMagnitude > 200)
+      if (collision.relativeVelocity.sqrMagnitude > 150)
          _stunTime = 3;
-   }
-
-   private void FacePlayer(float x, float y)
-   {
-      var angle = Mathf.Atan2(y, x)*Mathf.Rad2Deg;
-      rigidbody2D.rotation = angle - 90; // PERFORMANCE
    }
 }

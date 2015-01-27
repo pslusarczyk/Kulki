@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Tools;
+using UnityEngine;
 
 public class Steering : MonoBehaviour
 {
@@ -32,14 +33,12 @@ public class Steering : MonoBehaviour
 	   
       var forceFactor = Kick*Time.fixedDeltaTime*rigidbody2D.mass;
       var forceToAdd = new Vector2(forceX, forceY) * forceFactor;
-	   if (Input.GetKeyDown(KeyCode.K))
+	   if (Input.GetKey(KeyCode.K))
 	   {
-	      
          forceToAdd += forceToAdd.normalized * forceFactor 
                               * JumpBarObject.GetComponent<JumpBar>().Value * JumpForceMultiplier;
          JumpBarObject.GetComponent<JumpBar>().Value = 0;
 	   }
-
       rigidbody2D.AddForce(forceToAdd);
 	}
 }

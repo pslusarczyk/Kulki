@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Breeder : MonoBehaviour {
+public class Breeder : MonoBehaviour
+{
+
+   public float OptimalDistanceToPlayer;
 
 	// Use this for initialization
 	void Start () {
@@ -9,8 +12,13 @@ public class Breeder : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	   
+	void Update ()
+	{
+	   var playerChaser = GetComponent<PlayerChaser>();
+	   float toPlayer = (playerChaser.PlayerObject().transform.position - transform.position).magnitude;
+	   playerChaser.enabled = toPlayer > OptimalDistanceToPlayer;
+
+
 	}
 
    void Breed()
