@@ -3,7 +3,7 @@
 public class Steering : MonoBehaviour
 {
    public float MaxVelocitySqr = 2;
-   public float Kick = 240000;
+   public float Kick;
    public GameObject JumpBarObject;
    private const float JumpForceMultiplier = 60;
 
@@ -16,7 +16,8 @@ public class Steering : MonoBehaviour
 
    void Update()
    {
-
+      if (Input.GetKeyDown(KeyCode.T))
+         Time.timeScale = 1 + Mathf.Sin(Time.realtimeSinceStartup) * .5f;
 
    }
 	
@@ -31,12 +32,14 @@ public class Steering : MonoBehaviour
 	   
       var forceFactor = Kick*Time.fixedDeltaTime*rigidbody2D.mass;
       var forceToAdd = new Vector2(forceX, forceY) * forceFactor;
-	   if (Input.GetKey(KeyCode.K))
+	   if (Input.GetKeyDown(KeyCode.K))
 	   {
+	      
          forceToAdd += forceToAdd.normalized * forceFactor 
                               * JumpBarObject.GetComponent<JumpBar>().Value * JumpForceMultiplier;
          JumpBarObject.GetComponent<JumpBar>().Value = 0;
 	   }
+
       rigidbody2D.AddForce(forceToAdd);
 	}
 }
