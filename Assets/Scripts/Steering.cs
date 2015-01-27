@@ -21,6 +21,11 @@ public class Steering : MonoBehaviour
       var x = Mathf.Abs(rigidbody2D.velocity.x) > MaxVelocitySqr && inputAndSpeedSignsAreSameForX ? 0 : inputX;
       var y = Mathf.Abs(rigidbody2D.velocity.y) > MaxVelocitySqr && inputAndSpeedSignsAreSameForY ? 0 : inputY;
 	   var forceToAdd = new Vector2(x, y) * Kick * Time.fixedDeltaTime * rigidbody2D.mass;
+	   if (Input.GetKeyDown(KeyCode.LeftShift))
+	   {
+	      forceToAdd *= 50;
+	      transform.localScale *= -1;
+	   }
       rigidbody2D.AddForce(forceToAdd);
 	}
 }

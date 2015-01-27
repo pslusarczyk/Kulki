@@ -5,7 +5,7 @@ public class Breeder : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	InvokeRepeating("Breed", 1f, 1f);
+	   InvokeRepeating("Breed", 1f, 1f);
 	}
 	
 	// Update is called once per frame
@@ -15,7 +15,6 @@ public class Breeder : MonoBehaviour {
 
    void Breed()
    {
-      Instantiate(Resources.Load<PlayerChaser>("Prefabs/PlayerChaser"), transform.position, transform.rotation);
-      Debug.Log(Time.deltaTime);
+      Instantiate(Resources.Load<PlayerChaser>("Prefabs/PlayerChaser"), transform.position, Quaternion.identity);
    }
 }
