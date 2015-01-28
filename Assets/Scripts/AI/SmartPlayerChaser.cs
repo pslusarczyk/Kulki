@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Assets;
 using Tools;
 using UnityEngine;
@@ -13,42 +14,75 @@ public class SmartPlayerChaser : PlayerChaser
    void OnDrawGizmos()
    {
       Gizmos.color = Color.green;
-      Gizmos.DrawLine(transform.position, transform.position + new Vector3(_seekDirection.x, _seekDirection.y, 0));
+   //   Gizmos.DrawLine(transform.position, transform.position + new Vector3(_seekDirection.x, _seekDirection.y, 0));
+      Gizmos.color = Color.blue;
+    //  Gizmos.DrawLine(transform.position, rigidbody2D.position + rigidbody2D.velocity);
       Gizmos.color = Color.red;
-      Gizmos.DrawLine(transform.position, transform.position + new Vector3(_fleeDirection.x, _fleeDirection.y, 0));
+    //  Gizmos.DrawLine(transform.position, transform.position + new Vector3(_fleeDirection.x, _fleeDirection.y, 0));
    }
 
    protected override Vector2 ComputeDirection()
    {
-      var probePoint = rigidbody2D.position + rigidbody2D.velocity;
-      RaycastHit2D[] hits   = Physics2D.LinecastAll(rigidbody2D.position, probePoint, Constants.Layers.Solid);
-      if (hits.Count() > 0)
+      Vector2 steeringVector = Vector2.zero;
+
+      IEnumerable<RaycastHit2D> hits = 
+         RayCastFrom(new Vector2(-.4f, 0)).Union(
+         RayCastFrom(new Vector2(+.4f, 0)));
+      if (hits.Any())
       {
          var closestHit = hits.Aggregate((prev, next) =>
             prev == null || prev.distance < next.distance
-               ? next
-               : prev
+               ? prev
+               : next
             );
 
-            var avoidanceForce = (rigidbody2D.velocity - closestHit.centroid).normalized;
-            return avoidanceForce;
+         Vector2 hitCenter = closestHit.transform.position;
+         // .Debug.DrawRay(hitCenter, hitCenter + Vector2.up * .1f, Color.yellow, 1);
+         //// .Debug.Log();
+         //// .Debug.Log(); 
+         //// .Debug.Log("d r");
+         var depth = (hitCenter - closestHit.point).magnitude 
+            - Vector3.Cross(rigidbody2D.velocity.normalized, hitCenter - rigidbody2D.position).magnitude;
+         // .Debug.Log(depth);
+         var avoidanceForce = closestHit.normal * depth * MaxVelocitySqr * 10;
+         steeringVector += avoidanceForce;
+         float distanceToCollision = (closestHit.point - rigidbody2D.position).magnitude;
+         if (distanceToCollision < rigidbody2D.velocity.magnitude*0.5)
+         {
+          //  var breakForce = -rigidbody2D.velocity/distanceToCollision*MaxVelocitySqr;
+          //  steeringVector += breakForce;
+          //  // .Debug.DrawLine(rigidbody2D.position, breakForce, Color.red);
+         }
+         // .Debug.DrawLine(rigidbody2D.position, steeringVector, Color.blue);
+         
       }
+     // hits.ToList().ForEach(h => // .Debug.DrawRay(rigidbody2D.position, h.point - rigidbody2D.position, Color.red));
       
       var target = PlayerObject().transform.position;
-      Vector2 steeringVector;
      //if ((Pit.transform.position - transform.position).sqrMagnitude < 100f)
      //   steeringVector = Seek(target) + Flee(Pit.transform.position);
      //else
-         steeringVector = Seek(target);
+      
+         steeringVector += Seek(target);
+
+      // .Debug.DrawLine(rigidbody2D.position, Seek(target), Color.magenta);
       return steeringVector.normalized;
+   }
+
+   private RaycastHit2D[] RayCastFrom(Vector2 transposition)
+   {
+      Vector3 transposition3 = transposition;
+      // .Debug.DrawRay(
+      //  transform.TransformPoint(transposition),
+      //  rigidbody2D.velocity, Color.cyan, .01f);
+      return Physics2D.RaycastAll(rigidbody2D.position + transposition, rigidbody2D.velocity, rigidbody2D.velocity.magnitude, 
+         Constants.Layers.Collider);
    }
 
    private Vector2 Seek(Vector2 targetPosition)
    {
-      var toTarget = new Vector2(
-         targetPosition.x - transform.position.x,
-         targetPosition.y - transform.position.y);
-      var result = toTarget - rigidbody2D.velocity;
+      var desiredVelocity = (targetPosition-rigidbody2D.position).normalized * MaxVelocitySqr;
+      var result = desiredVelocity - rigidbody2D.velocity;
       _seekDirection = result;
       return result;
    }

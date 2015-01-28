@@ -18,7 +18,7 @@ public class Steering : MonoBehaviour
    void Update()
    {
       if (Input.GetKeyDown(KeyCode.T))
-         Time.timeScale = 1 + Mathf.Sin(Time.realtimeSinceStartup) * .5f;
+         Time.timeScale = (Time.timeScale*.5f);
 
    }
 	
