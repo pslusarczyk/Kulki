@@ -42,16 +42,18 @@ public class PlayerChaser : MonoBehaviour
       var inputAndSpeedSignsAreSameForY = !(rigidbody2D.velocity.y * directionY < 0);
       var x = Mathf.Abs(rigidbody2D.velocity.x) > MaxVelocitySqr && inputAndSpeedSignsAreSameForX ? 0 : directionX;
       var y = Mathf.Abs(rigidbody2D.velocity.y) > MaxVelocitySqr && inputAndSpeedSignsAreSameForY ? 0 : directionY;
-      this.LookAt2D(x, y);
+      
       Vector2 forceToAdd = new Vector2(x, y).normalized * Kick * Time.fixedDeltaTime * rigidbody2D.mass;
       rigidbody2D.AddForce(forceToAdd);
    }
 
    protected virtual Vector2 ComputeDirection()
    {
-      return new Vector2(
+      var direction = new Vector2(
          PlayerObject().transform.position.x - transform.position.x,
          PlayerObject().transform.position.y - transform.position.y).normalized;
+      this.LookAt2D(direction);
+      return direction;
    }
 
    void OnCollisionEnter2D(Collision2D collision)

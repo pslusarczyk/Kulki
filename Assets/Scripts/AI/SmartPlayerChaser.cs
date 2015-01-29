@@ -40,7 +40,7 @@ public class SmartPlayerChaser : PlayerChaser
             );
 
          Vector2 hitCenter = closestHit.transform.position;
-         Debug.DrawRay(hitCenter, hitCenter + Vector2.up * .1f, Color.yellow, 1);
+         //.Debug.DrawRay(hitCenter, hitCenter + Vector2.up * .1f, Color.yellow, 1);
          //Debug.Log();
          //Debug.Log(); 
          //Debug.Log("d r");
@@ -48,10 +48,11 @@ public class SmartPlayerChaser : PlayerChaser
             - Vector3.Cross(rigidbody2D.velocity.normalized, hitCenter - rigidbody2D.position).magnitude;
          //Debug.Log(depth);
          var velocity = rigidbody2D.velocity;
+         var seekDirection = steeringVector;
          Vector2 avoidanceDirection = Vector2.zero;
-         var relativeCollisionAngle = -velocity.x * closestHit.normal.y + -velocity.y * closestHit.normal.x;
-        Debug.Log(relativeCollisionAngle);
-         if(relativeCollisionAngle < 0)
+         var relativeCollisionAngle = seekDirection.x * closestHit.normal.y + -seekDirection.y * closestHit.normal.x;
+         //Debug.Log(relativeCollisionAngle);
+         if(relativeCollisionAngle >= 0)
             avoidanceDirection = new Vector2(-velocity.y, velocity.x);
          else
             avoidanceDirection = new Vector2(velocity.y, -velocity.x);
@@ -62,12 +63,12 @@ public class SmartPlayerChaser : PlayerChaser
          {
           //  var breakForce = -rigidbody2D.velocity/distanceToCollision*MaxVelocitySqr;
           //  steeringVector += breakForce;
-          //  Debug.DrawLine(rigidbody2D.position, breakForce, Color.red);
+          //  //.Debug.DrawLine(rigidbody2D.position, breakForce, Color.red);
          }
-         Debug.DrawLine(rigidbody2D.position, rigidbody2D.position + avoidanceForce, Color.blue);
+         //.Debug.DrawLine(rigidbody2D.position, rigidbody2D.position + avoidanceForce, Color.blue);
          
       }
-     // hits.ToList().ForEach(h => Debug.DrawRay(rigidbody2D.position, h.point - rigidbody2D.position, Color.red));
+     // hits.ToList().ForEach(h => //.Debug.DrawRay(rigidbody2D.position, h.point - rigidbody2D.position, Color.red));
       
      //if ((Pit.transform.position - transform.position).sqrMagnitude < 100f)
      //   steeringVector = Seek(target) + Flee(Pit.transform.position);
@@ -75,15 +76,15 @@ public class SmartPlayerChaser : PlayerChaser
       
          
 
-         Debug.DrawLine(rigidbody2D.position, rigidbody2D.position + Seek(target), Color.magenta);
+         //.Debug.DrawLine(rigidbody2D.position, rigidbody2D.position + Seek(target), Color.magenta);
       return steeringVector.normalized;
    }
 
    private RaycastHit2D[] RayCastFrom(Vector2 transposition)
    {
-      Debug.DrawRay(
-        transform.TransformPoint(transposition),
-        rigidbody2D.velocity, Color.cyan, .001f);
+      //.Debug.DrawRay(
+      //  transform.TransformPoint(transposition),
+      //  rigidbody2D.velocity, Color.cyan, .001f);
       return Physics2D.RaycastAll(rigidbody2D.position + transposition, rigidbody2D.velocity, rigidbody2D.velocity.magnitude, 
          Constants.Layers.Collider);
    }
