@@ -28,24 +28,27 @@ public class SmartPlayerChaser : PlayerChaser
    {
       Vector2 avoidanceForce = Vector2.zero;
       IEnumerable<RaycastHit2D> hits = RayCastFrom(new Vector2(0, 0));
-      IEnumerable<RaycastHit2D> hitsCloserThanTarget = hits.Where(
-         h => (rigidbody2D.position - h.point).sqrMagnitude < (rigidbody2D.position - _targetPosition).sqrMagnitude).ToList();
-      if (hitsCloserThanTarget.Any())
+      IEnumerable<RaycastHit2D> properHits = hits.Where(
+         h => (rigidbody2D.position - h.point).sqrMagnitude < (rigidbody2D.position - _targetPosition).sqrMagnitude // closer then target
+         && (rigidbody2D.position - h.point).sqrMagnitude > .1f) // not too close
+         .ToList();
+      if (properHits.Any())
       {
-         var closestHit = hitsCloserThanTarget.Aggregate((prev, next) =>
+         var closestHit = properHits.Aggregate((prev, next) =>
             prev == null || prev.distance < next.distance
                ? prev
                : next
             );
 
-         Vector2 hitObjectCenter = closestHit.transform.position;
-         var penetration = (hitObjectCenter - closestHit.point).magnitude
-                     - Vector3.Cross(rigidbody2D.velocity.normalized, hitObjectCenter - rigidbody2D.position).magnitude;
+         // Vector2 hitObjectCenter = closestHit.transform.position;
+         // var penetration = (hitObjectCenter - closestHit.point).magnitude
+         //       - Vector3.Cross(rigidbody2D.velocity.normalized, hitObjectCenter - rigidbody2D.position).magnitude;
+         // Buckman recomended the above for computing penetration of circle-like objects and the below for wall-like
+         var penetration = rigidbody2D.velocity.magnitude - (rigidbody2D.position - closestHit.point).magnitude;
          var velocity = rigidbody2D.velocity;
-         var facingDirection = steeringVector;
          Vector2 avoidanceDirection;
-         // angle between facing the direction and the normal of the hit
-         var relativeCollisionAngle = facingDirection.x*closestHit.normal.y + -facingDirection.y*closestHit.normal.x;
+         // angle between the velocity and the normal of the hit
+         var relativeCollisionAngle = velocity.x * closestHit.normal.y + -velocity.y * closestHit.normal.x;
          if (relativeCollisionAngle >= 0)
             avoidanceDirection = new Vector2(-velocity.y, velocity.x); // 90 degrees to the left
          else
