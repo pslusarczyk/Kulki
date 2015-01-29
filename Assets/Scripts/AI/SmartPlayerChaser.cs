@@ -51,7 +51,10 @@ public class SmartPlayerChaser : PlayerChaser
          else
             avoidanceDirection = new Vector2(velocity.y, -velocity.x); // 90 degrees to the right
          avoidanceForce = avoidanceDirection*penetration*MaxVelocitySqr*AvoidanceCoefficient;
+         Debug.DrawLine(rigidbody2D.position, closestHit.point, Color.cyan);
       }
+      Debug.DrawLine(rigidbody2D.position, rigidbody2D.position + steeringVector, Color.green);
+      Debug.DrawLine(rigidbody2D.position, rigidbody2D.position + avoidanceForce, Color.blue);
       return avoidanceForce;
    }
 
