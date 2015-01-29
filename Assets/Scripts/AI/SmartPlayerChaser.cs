@@ -25,9 +25,12 @@ public class SmartPlayerChaser : PlayerChaser
    {
       Vector2 steeringVector = Vector2.zero;
 
-      IEnumerable<RaycastHit2D> hits = 
-         RayCastFrom(new Vector2(-.4f, 0)).Union(
-         RayCastFrom(new Vector2(+.4f, 0)));
+      var target = PlayerObject().transform.position;
+      steeringVector += Seek(target);
+      this.LookAt2D(steeringVector);
+      IEnumerable<RaycastHit2D> hits = RayCastFrom(new Vector2(0, 0));
+      //  RayCastFrom(new Vector2(-.3f, 0)).Union(
+      //  RayCastFrom(new Vector2(+.3f, 0)));
       if (hits.Any())
       {
          var closestHit = hits.Aggregate((prev, next) =>
@@ -37,44 +40,50 @@ public class SmartPlayerChaser : PlayerChaser
             );
 
          Vector2 hitCenter = closestHit.transform.position;
-         // .Debug.DrawRay(hitCenter, hitCenter + Vector2.up * .1f, Color.yellow, 1);
-         //// .Debug.Log();
-         //// .Debug.Log(); 
-         //// .Debug.Log("d r");
+         Debug.DrawRay(hitCenter, hitCenter + Vector2.up * .1f, Color.yellow, 1);
+         //Debug.Log();
+         //Debug.Log(); 
+         //Debug.Log("d r");
          var depth = (hitCenter - closestHit.point).magnitude 
             - Vector3.Cross(rigidbody2D.velocity.normalized, hitCenter - rigidbody2D.position).magnitude;
-         // .Debug.Log(depth);
-         var avoidanceForce = closestHit.normal * depth * MaxVelocitySqr * 10;
+         //Debug.Log(depth);
+         var velocity = rigidbody2D.velocity;
+         Vector2 avoidanceDirection = Vector2.zero;
+         var relativeCollisionAngle = -velocity.x * closestHit.normal.y + -velocity.y * closestHit.normal.x;
+        Debug.Log(relativeCollisionAngle);
+         if(relativeCollisionAngle < 0)
+            avoidanceDirection = new Vector2(-velocity.y, velocity.x);
+         else
+            avoidanceDirection = new Vector2(velocity.y, -velocity.x);
+         var avoidanceForce = avoidanceDirection * depth * MaxVelocitySqr * 5;
          steeringVector += avoidanceForce;
          float distanceToCollision = (closestHit.point - rigidbody2D.position).magnitude;
          if (distanceToCollision < rigidbody2D.velocity.magnitude*0.5)
          {
           //  var breakForce = -rigidbody2D.velocity/distanceToCollision*MaxVelocitySqr;
           //  steeringVector += breakForce;
-          //  // .Debug.DrawLine(rigidbody2D.position, breakForce, Color.red);
+          //  Debug.DrawLine(rigidbody2D.position, breakForce, Color.red);
          }
-         // .Debug.DrawLine(rigidbody2D.position, steeringVector, Color.blue);
+         Debug.DrawLine(rigidbody2D.position, rigidbody2D.position + avoidanceForce, Color.blue);
          
       }
-     // hits.ToList().ForEach(h => // .Debug.DrawRay(rigidbody2D.position, h.point - rigidbody2D.position, Color.red));
+     // hits.ToList().ForEach(h => Debug.DrawRay(rigidbody2D.position, h.point - rigidbody2D.position, Color.red));
       
-      var target = PlayerObject().transform.position;
      //if ((Pit.transform.position - transform.position).sqrMagnitude < 100f)
      //   steeringVector = Seek(target) + Flee(Pit.transform.position);
      //else
       
-         steeringVector += Seek(target);
+         
 
-      // .Debug.DrawLine(rigidbody2D.position, Seek(target), Color.magenta);
+         Debug.DrawLine(rigidbody2D.position, rigidbody2D.position + Seek(target), Color.magenta);
       return steeringVector.normalized;
    }
 
    private RaycastHit2D[] RayCastFrom(Vector2 transposition)
    {
-      Vector3 transposition3 = transposition;
-      // .Debug.DrawRay(
-      //  transform.TransformPoint(transposition),
-      //  rigidbody2D.velocity, Color.cyan, .01f);
+      Debug.DrawRay(
+        transform.TransformPoint(transposition),
+        rigidbody2D.velocity, Color.cyan, .001f);
       return Physics2D.RaycastAll(rigidbody2D.position + transposition, rigidbody2D.velocity, rigidbody2D.velocity.magnitude, 
          Constants.Layers.Collider);
    }
