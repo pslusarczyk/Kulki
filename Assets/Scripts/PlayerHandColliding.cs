@@ -8,25 +8,30 @@ public class PlayerHandColliding : MonoBehaviour {
 
    private Rigidbody2D _catchedBody;
 
+   public Rigidbody2D CatchedBody
+   {
+      get { return _catchedBody; }
+   }
+
    void Update()
    {
-      if (Input.GetKeyDown("space") && _catchedBody != null)
+      if (Input.GetKeyDown("space") && CatchedBody != null)
       {
          Destroy(PlayerAnchor.gameObject.GetComponents<DistanceJoint2D>()
-            .First(c => c.connectedBody == _catchedBody));
-         _catchedBody.GetComponent<PlayerChaser>().enabled = true;
+            .First(c => c.connectedBody == CatchedBody));
+         CatchedBody.GetComponent<PlayerChaser>().enabled = true;
          _catchedBody = null;
       }
    }
 
    void OnTriggerEnter2D(Collider2D metCollider)
    {
-      if (_catchedBody == null && metCollider.gameObject.CompareTag("Catchable"))
+      if (CatchedBody == null && metCollider.gameObject.CompareTag("Catchable"))
       {
          _catchedBody = metCollider.rigidbody2D;
-         _catchedBody.GetComponent<PlayerChaser>().enabled = false;
+         CatchedBody.GetComponent<PlayerChaser>().enabled = false;
          var joint = PlayerAnchor.gameObject.AddComponent<DistanceJoint2D>();
-         joint.connectedBody = _catchedBody;
+         joint.connectedBody = CatchedBody;
          joint.distance = .9f;
       }
    }

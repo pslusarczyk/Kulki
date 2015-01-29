@@ -4,8 +4,10 @@
    {
       public class Layers
       {
-         public const int Solid = 1 << 8;
-         public const int Collider = 1 << 9;
+         public const int SolidMask = 1 << 8;
+         public const int Solid = 8;
+         public const int ColliderMask = 1 << 9;
+         public const int Collider = 9;
       }
    }
 }

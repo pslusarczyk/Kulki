@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class SmartPlayerChaser : PlayerChaser
 {
+   private const bool _debug = false;
    public GameObject Pit;
    public float AvoidanceCoefficient;
    private Vector2 _targetPosition;
@@ -54,10 +55,10 @@ public class SmartPlayerChaser : PlayerChaser
          else
             avoidanceDirection = new Vector2(velocity.y, -velocity.x); // 90 degrees to the right
          avoidanceForce = avoidanceDirection*penetration*MaxVelocitySqr*AvoidanceCoefficient;
-         Debug.DrawLine(rigidbody2D.position, closestHit.point, Color.cyan);
+         if(_debug) Debug.DrawLine(rigidbody2D.position, closestHit.point, Color.cyan);
       }
-      Debug.DrawLine(rigidbody2D.position, rigidbody2D.position + steeringVector, Color.green);
-      Debug.DrawLine(rigidbody2D.position, rigidbody2D.position + avoidanceForce, Color.blue);
+      if (_debug) Debug.DrawLine(rigidbody2D.position, rigidbody2D.position + steeringVector, Color.green);
+      if (_debug) Debug.DrawLine(rigidbody2D.position, rigidbody2D.position + avoidanceForce, Color.blue);
       return avoidanceForce;
    }
 
@@ -70,7 +71,7 @@ public class SmartPlayerChaser : PlayerChaser
    private RaycastHit2D[] RayCastFrom(Vector2 transposition)
    {
       return Physics2D.RaycastAll(rigidbody2D.position + transposition, rigidbody2D.velocity, rigidbody2D.velocity.magnitude, 
-         Constants.Layers.Collider);
+         Constants.Layers.ColliderMask);
    }
 
    private Vector2 Flee(Vector2 sourcePosition)

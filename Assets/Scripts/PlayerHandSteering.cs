@@ -1,9 +1,11 @@
-﻿using Tools;
+﻿using Assets;
+using Tools;
 using UnityEngine;
 
 public class PlayerHandSteering : MonoBehaviour
 {
    public PlayerHandColliding PlayerHandColliding;
+   public EdgeCollider2D HostageObstacle;
    
 	// Update is called once per frame
 	void Update () {
@@ -15,5 +17,15 @@ public class PlayerHandSteering : MonoBehaviour
       GetComponent<SpriteRenderer>().material.SetAlpha(handPosition.sqrMagnitude);
 	   transform.localPosition = handPosition * .5f;
 	   PlayerHandColliding.transform.position = transform.position;
+
+	   var hostage = PlayerHandColliding.GetComponent<PlayerHandColliding>().CatchedBody;
+      HostageObstacle.GetComponent<EdgeCollider2D>().enabled = hostage != null;
+      if (hostage != null && handPosition.sqrMagnitude > .1f)
+      {
+         PlayerHandColliding.gameObject.layer = Constants.Layers.Collider;
+         var hostageToHand = transform.position - hostage.transform.position;
+         hostage.AddForce(hostageToHand * 15);
+	   }
 	}
 }
+   
