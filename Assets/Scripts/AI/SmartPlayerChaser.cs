@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Assets;
+using Assets.Scripts;
 using Tools;
 using UnityEngine;
 
-public class SmartPlayerChaser : PlayerChaser
+public class SmartPlayerChaser : NpcBehaviour
 {
    private const bool _debug = false;
    public GameObject Pit;
@@ -21,6 +22,11 @@ public class SmartPlayerChaser : PlayerChaser
 
       var avoidanceForce = AvoidCollisions(steeringVector);
       steeringVector += avoidanceForce;
+
+      var flowFieldForce = FlowFieldForce();
+      steeringVector += flowFieldForce;
+
+      
 
       return steeringVector.normalized;
    }
@@ -66,6 +72,27 @@ public class SmartPlayerChaser : PlayerChaser
    {
       var desiredVelocity = (targetPosition-rigidbody2D.position).normalized * MaxVelocitySqr;
       return desiredVelocity - rigidbody2D.velocity;
+   }
+
+   private Vector2 FlowFieldForce()
+   {
+      var playerFlowField = PlayerObject().GetComponent<FlowFieldEmitter>();
+      if (playerFlowField.enabled
+          && (PlayerObject().rigidbody2D.position - rigidbody2D.position).magnitude < playerFlowField.Radius)
+      {
+         var forceFieldForce = (rigidbody2D.position - PlayerObject().rigidbody2D.position) * 1000;
+
+         var attractionForce = Vector2.zero;
+         foreach (var attractor in playerFlowField.Attractors)
+         {
+            var force = (attractor - rigidbody2D.position).normalized * (attractor - rigidbody2D.position).sqrMagnitude*7.5f;
+            attractionForce += force;
+         }
+         forceFieldForce += attractionForce;
+         if(_debug) Debug.DrawLine(rigidbody2D.position, rigidbody2D.position + attractionForce, Color.green);
+         return forceFieldForce;
+      }
+      return Vector2.zero;
    }
 
    private RaycastHit2D[] RayCastFrom(Vector2 transposition)

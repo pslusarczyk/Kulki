@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerHandSteering : MonoBehaviour
 {
    public PlayerHandColliding PlayerHandColliding;
-   public EdgeCollider2D HostageObstacle;
+   public CircleCollider2D HostageObstacle;
    
 	// Update is called once per frame
 	void Update () {
@@ -19,7 +19,7 @@ public class PlayerHandSteering : MonoBehaviour
 	   PlayerHandColliding.transform.position = transform.position;
 
 	   var hostage = PlayerHandColliding.GetComponent<PlayerHandColliding>().CatchedBody;
-      HostageObstacle.GetComponent<EdgeCollider2D>().enabled = hostage != null;
+      HostageObstacle.GetComponent<CircleCollider2D>().enabled = hostage != null;
       if (hostage != null && handPosition.sqrMagnitude > .1f)
       {
          PlayerHandColliding.gameObject.layer = Constants.Layers.Collider;
