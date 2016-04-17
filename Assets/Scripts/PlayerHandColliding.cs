@@ -28,7 +28,7 @@ public class PlayerHandColliding : MonoBehaviour {
    {
       if (CatchedBody == null && metCollider.gameObject.CompareTag("Catchable"))
       {
-         _catchedBody = metCollider.rigidbody2D;
+         _catchedBody = metCollider.GetComponent<Rigidbody2D>();
          CatchedBody.GetComponent<PlayerChaser>().enabled = false;
          var joint = PlayerAnchor.gameObject.AddComponent<DistanceJoint2D>();
          joint.connectedBody = CatchedBody;

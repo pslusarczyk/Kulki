@@ -26,12 +26,12 @@ public class Steering : MonoBehaviour
 	{
 	   var inputX = Input.GetAxis("Horizontal");
       var inputY = Input.GetAxis("Vertical");
-	   var inputAndSpeedSignsAreSameForX = !(rigidbody2D.velocity.x * inputX < 0);
-	   var inputAndSpeedSignsAreSameForY = !(rigidbody2D.velocity.y * inputY < 0);
-      var forceX = Mathf.Abs(rigidbody2D.velocity.x) > MaxVelocitySqr && inputAndSpeedSignsAreSameForX ? 0 : inputX;
-      var forceY = Mathf.Abs(rigidbody2D.velocity.y) > MaxVelocitySqr && inputAndSpeedSignsAreSameForY ? 0 : inputY;
+	   var inputAndSpeedSignsAreSameForX = !(GetComponent<Rigidbody2D>().velocity.x * inputX < 0);
+	   var inputAndSpeedSignsAreSameForY = !(GetComponent<Rigidbody2D>().velocity.y * inputY < 0);
+      var forceX = Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) > MaxVelocitySqr && inputAndSpeedSignsAreSameForX ? 0 : inputX;
+      var forceY = Mathf.Abs(GetComponent<Rigidbody2D>().velocity.y) > MaxVelocitySqr && inputAndSpeedSignsAreSameForY ? 0 : inputY;
 	   
-      var forceFactor = Kick*Time.fixedDeltaTime*rigidbody2D.mass;
+      var forceFactor = Kick*Time.fixedDeltaTime*GetComponent<Rigidbody2D>().mass;
       var forceToAdd = new Vector2(forceX, forceY) * forceFactor;
 	   if (Input.GetKey(KeyCode.K))
 	   {
@@ -39,6 +39,6 @@ public class Steering : MonoBehaviour
                               * JumpBarObject.GetComponent<JumpBar>().Value * JumpForceMultiplier;
          JumpBarObject.GetComponent<JumpBar>().Value = 0;
 	   }
-      rigidbody2D.AddForce(forceToAdd);
+      GetComponent<Rigidbody2D>().AddForce(forceToAdd);
 	}
 }

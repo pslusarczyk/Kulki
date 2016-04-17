@@ -38,13 +38,13 @@ public abstract class NpcBehaviour : MonoBehaviour
       Vector2 direction = ComputeDirection();
       var directionX = direction.x;
       var directionY = direction.y;
-      var inputAndSpeedSignsAreSameForX = !(rigidbody2D.velocity.x * directionX < 0);
-      var inputAndSpeedSignsAreSameForY = !(rigidbody2D.velocity.y * directionY < 0);
-      var x = Mathf.Abs(rigidbody2D.velocity.x) > MaxVelocitySqr && inputAndSpeedSignsAreSameForX ? 0 : directionX;
-      var y = Mathf.Abs(rigidbody2D.velocity.y) > MaxVelocitySqr && inputAndSpeedSignsAreSameForY ? 0 : directionY;
+      var inputAndSpeedSignsAreSameForX = !(GetComponent<Rigidbody2D>().velocity.x * directionX < 0);
+      var inputAndSpeedSignsAreSameForY = !(GetComponent<Rigidbody2D>().velocity.y * directionY < 0);
+      var x = Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) > MaxVelocitySqr && inputAndSpeedSignsAreSameForX ? 0 : directionX;
+      var y = Mathf.Abs(GetComponent<Rigidbody2D>().velocity.y) > MaxVelocitySqr && inputAndSpeedSignsAreSameForY ? 0 : directionY;
       
-      Vector2 forceToAdd = new Vector2(x, y).normalized * Kick * Time.fixedDeltaTime * rigidbody2D.mass;
-      rigidbody2D.AddForce(forceToAdd);
+      Vector2 forceToAdd = new Vector2(x, y).normalized * Kick * Time.fixedDeltaTime * GetComponent<Rigidbody2D>().mass;
+      GetComponent<Rigidbody2D>().AddForce(forceToAdd);
    }
 
    void OnCollisionEnter2D(Collision2D collision)
