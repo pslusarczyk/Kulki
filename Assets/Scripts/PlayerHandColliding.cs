@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine;
 using System.Collections;
+using Assets;
 
 public class PlayerHandColliding : MonoBehaviour {
 
@@ -17,22 +18,37 @@ public class PlayerHandColliding : MonoBehaviour {
    {
       if (Input.GetKeyDown("space") && CatchedBody != null)
       {
-         Destroy(PlayerAnchor.gameObject.GetComponents<DistanceJoint2D>()
-            .First(c => c.connectedBody == CatchedBody));
-         CatchedBody.GetComponent<PlayerChaser>().enabled = true;
-         _catchedBody = null;
+         PlayerAnchor.gameObject.GetComponent<DistanceJoint2D>().connectedBody = null;
+         PlayerAnchor.gameObject.GetComponent<DistanceJoint2D>().enabled = false;
+         CatchedBody.GetComponent<SmartPlayerChaser>().enabled = true;
+         Destroy(CatchedBody.transform.GetChild(0).gameObject);
+         StartCoroutine(Example());
       }
+   }
+
+   IEnumerator Example()
+   {
+      yield return new WaitForSeconds(.5f);
+      _catchedBody = null;
    }
 
    void OnTriggerEnter2D(Collider2D metCollider)
    {
-      if (CatchedBody == null && metCollider.gameObject.CompareTag("Catchable"))
+      if (metCollider.gameObject.CompareTag("Catchable"))
       {
+         if (!(CatchedBody == null && Input.GetKey("space")))
+            return;
          _catchedBody = metCollider.GetComponent<Rigidbody2D>();
-         CatchedBody.GetComponent<PlayerChaser>().enabled = false;
-         var joint = PlayerAnchor.gameObject.AddComponent<DistanceJoint2D>();
+         CatchedBody.GetComponent<SmartPlayerChaser>().enabled = false;
+         GameObject highlight = (GameObject)Instantiate(Resources.Load("Prefabs/CatchedHighlight"), 
+            CatchedBody.transform.position, Quaternion.identity);
+         highlight.transform.parent = CatchedBody.transform;
+         var joint = PlayerAnchor.gameObject.GetComponent<DistanceJoint2D>();
+         joint.autoConfigureDistance = false;
          joint.connectedBody = CatchedBody;
-         joint.distance = .9f;
+         joint.distance = .8f;
+         joint.connectedAnchor = Vector2.zero;
+         joint.enabled = true;
       }
    }
 }

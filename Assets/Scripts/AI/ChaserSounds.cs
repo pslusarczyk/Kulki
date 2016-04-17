@@ -16,11 +16,11 @@ public class ChaserSounds : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-        var playerFlowField = PlayerObject().GetComponent<FlowFieldEmitter>();
-	    if (playerFlowField.enabled
-	        &&
-	        (PlayerObject().GetComponent<Rigidbody2D>().position - GetComponent<Rigidbody2D>().position).magnitude <
-	        playerFlowField.Radius)
+    //    var playerFlowField = PlayerObject().GetComponent<FlowFieldEmitter>();
+	 //   if (playerFlowField.enabled
+	 //       &&
+	 //       (PlayerObject().GetComponent<Rigidbody2D>().position - GetComponent<Rigidbody2D>().position).magnitude <
+	 //       playerFlowField.Radius)
 	        
 	    return;
 	}

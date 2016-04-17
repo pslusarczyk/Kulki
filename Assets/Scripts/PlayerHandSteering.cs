@@ -11,6 +11,7 @@ public class PlayerHandSteering : MonoBehaviour
 	void Update () {
       var inputX = Input.GetAxis("Horizontal2");
       var inputY = Input.GetAxis("Vertical2");
+
 	   var handPosition = new Vector2(inputX, inputY);
 	   const float minimalHandMagnitude = .2f;
       GetComponent<SpriteRenderer>().enabled = handPosition.sqrMagnitude > minimalHandMagnitude;
@@ -22,7 +23,6 @@ public class PlayerHandSteering : MonoBehaviour
       HostageObstacle.GetComponent<CircleCollider2D>().enabled = hostage != null;
       if (hostage != null && handPosition.sqrMagnitude > .1f)
       {
-         PlayerHandColliding.gameObject.layer = Constants.Layers.Collider;
          var hostageToHand = transform.position - hostage.transform.position;
          hostage.AddForce(hostageToHand * 15);
 	   }
