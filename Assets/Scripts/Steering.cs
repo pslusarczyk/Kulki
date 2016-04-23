@@ -17,7 +17,9 @@ public class Steering : MonoBehaviour
 
    void Update()
    {
-      if (Input.GetKeyDown(KeyCode.T))
+      if (Input.GetKeyDown(KeyCode.T) && Input.GetKeyDown(KeyCode.RightShift))
+         Time.timeScale = (Time.timeScale*2f);
+      else if (Input.GetKeyDown(KeyCode.T))
          Time.timeScale = (Time.timeScale*.5f);
 
    }
@@ -40,6 +42,10 @@ public class Steering : MonoBehaviour
                               * JumpBar.Value * JumpForceMultiplier;
          JumpBar.Value = 0;
 	   }
+	   if (Input.GetKeyDown(KeyCode.C))
+	   {
+         Instantiate(Resources.Load("Prefabs/Player"), transform.position, Quaternion.identity);
+      }
       GetComponent<Rigidbody2D>().AddForce(forceToAdd);
 	}
 }

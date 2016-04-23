@@ -11,7 +11,7 @@ public class PlayerHandSteering : MonoBehaviour
 
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
       var inputX = Input.GetAxis("Horizontal2");
       var inputY = Input.GetAxis("Vertical2");
 
@@ -39,7 +39,7 @@ public class PlayerHandSteering : MonoBehaviour
    {
       if (JumpBar.Value <= 0.15) return;
 
-      JumpBar.Value -= Time.deltaTime * 1.5f;
+      JumpBar.Value -= Time.fixedDeltaTime * 1.5f;
 
       foreach (var hostage in hostages)
       {

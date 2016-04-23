@@ -26,6 +26,6 @@ public class JumpBar : MonoBehaviour
       transform.localScale = new Vector3(scale.x, Value * .25f - .01f, 1);
 
       if (Mathf.Abs(inputX) + Mathf.Abs(inputY) < .01 && Value < 1)
-         Value = Value + Mathf.Clamp01(Time.deltaTime);
+         Value = Value + Time.deltaTime;
 	}
 }
