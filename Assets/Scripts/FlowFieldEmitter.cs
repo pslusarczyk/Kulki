@@ -7,7 +7,7 @@ namespace Assets.Scripts
 {
    public class FlowFieldEmitter : MonoBehaviour
    {
-      private const bool _debug = false;
+      private const bool _debug = true;
       public float Radius;
       
       public IEnumerable<Vector2> Attractors { get; set; }

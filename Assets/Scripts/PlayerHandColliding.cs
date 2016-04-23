@@ -1,51 +1,69 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using Assets;
 
 public class PlayerHandColliding : MonoBehaviour {
 
-   public Rigidbody2D PlayerAnchor;
+   public GameObject Player;
 
-   private Rigidbody2D _catchedBody;
+   private bool _canCatch = true;
 
-   public Rigidbody2D CatchedBody
+   private List<Rigidbody2D> _caughtBodies = new List<Rigidbody2D>();
+
+   public List<Rigidbody2D> CaughtBodies
    {
-      get { return _catchedBody; }
+      get { return _caughtBodies; }
    }
 
    void Update()
    {
-      if (Input.GetKeyDown("space") && CatchedBody != null)
+      if (Input.GetKeyDown(KeyCode.R))
       {
-         PlayerAnchor.gameObject.GetComponent<DistanceJoint2D>().connectedBody = null;
-         PlayerAnchor.gameObject.GetComponent<DistanceJoint2D>().enabled = false;
-         CatchedBody.GetComponent<SmartPlayerChaser>().enabled = true;
-         Destroy(CatchedBody.transform.GetChild(0).gameObject);
-         StartCoroutine(Example());
+         foreach (DistanceJoint2D playerJoint in Player.gameObject.GetComponents<DistanceJoint2D>())
+         {
+          playerJoint.connectedBody = null;
+          playerJoint.enabled = false;
+         }
+         foreach (var caughtBody in _caughtBodies)
+         {
+            caughtBody.GetComponent<SmartPlayerChaser>().enabled = true;
+            Destroy(caughtBody.transform.GetChild(0).gameObject);
+         }
+         _caughtBodies = new List<Rigidbody2D>();
+         _canCatch = true;
       }
    }
 
-   IEnumerator Example()
+   void OnTriggerStay2D(Collider2D metCollider)
    {
-      yield return new WaitForSeconds(.5f);
-      _catchedBody = null;
-   }
+      if (_canCatch == false || !Input.GetKey("space"))
+         return;
 
-   void OnTriggerEnter2D(Collider2D metCollider)
-   {
       if (metCollider.gameObject.CompareTag("Catchable"))
       {
-         if (!(CatchedBody == null && Input.GetKey("space")))
+         Rigidbody2D body = metCollider.GetComponent<Rigidbody2D>();
+
+         if (_caughtBodies.Contains(body))
             return;
-         _catchedBody = metCollider.GetComponent<Rigidbody2D>();
-         CatchedBody.GetComponent<SmartPlayerChaser>().enabled = false;
-         GameObject highlight = (GameObject)Instantiate(Resources.Load("Prefabs/CatchedHighlight"), 
-            CatchedBody.transform.position, Quaternion.identity);
-         highlight.transform.parent = CatchedBody.transform;
-         var joint = PlayerAnchor.gameObject.GetComponent<DistanceJoint2D>();
+
+         var joint = Player.GetComponents<DistanceJoint2D>().FirstOrDefault(j => j.enabled == false);
+         if (joint == null)
+         {
+            _canCatch = false;
+            return;
+         }
+
+         _caughtBodies.Add(body);
+         body.GetComponent<SmartPlayerChaser>().enabled = false;
+         GameObject highlight = (GameObject)Instantiate(Resources.Load("Prefabs/CatchedHighlight"),
+            body.transform.position, Quaternion.identity);
+         highlight.transform.parent = body.transform;
+
          joint.autoConfigureDistance = false;
-         joint.connectedBody = CatchedBody;
+         joint.connectedBody = body;
          joint.distance = .8f;
          joint.connectedAnchor = Vector2.zero;
          joint.enabled = true;

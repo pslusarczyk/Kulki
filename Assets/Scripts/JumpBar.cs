@@ -6,7 +6,7 @@ public class JumpBar : MonoBehaviour
    public Color LoadingColor;
    public Color FullColor;
 
-   public float Value { get; set; }
+   public float Value;
 
    // Use this for initialization
 	void Start () {
