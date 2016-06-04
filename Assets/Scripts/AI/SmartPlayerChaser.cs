@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class SmartPlayerChaser : NpcBehaviour
 {
-   private const bool _debug = true;
+   private const bool Debug = false;
    public GameObject Pit;
    public float AvoidanceCoefficient;
    private Vector2 _targetPosition;
@@ -61,10 +61,10 @@ public class SmartPlayerChaser : NpcBehaviour
          else
             avoidanceDirection = new Vector2(velocity.y, -velocity.x); // 90 degrees to the right
          avoidanceForce = avoidanceDirection*penetration*MaxVelocitySqr*AvoidanceCoefficient;
-         if(_debug) Debug.DrawLine(GetComponent<Rigidbody2D>().position, closestHit.point, Color.cyan);
+         if(Debug) UnityEngine.Debug.DrawLine(GetComponent<Rigidbody2D>().position, closestHit.point, Color.cyan);
       }
-      if (_debug) Debug.DrawLine(GetComponent<Rigidbody2D>().position, GetComponent<Rigidbody2D>().position + steeringVector, Color.green);
-      if (_debug) Debug.DrawLine(GetComponent<Rigidbody2D>().position, GetComponent<Rigidbody2D>().position + avoidanceForce, Color.blue);
+      if (Debug) UnityEngine.Debug.DrawLine(GetComponent<Rigidbody2D>().position, GetComponent<Rigidbody2D>().position + steeringVector, Color.green);
+      if (Debug) UnityEngine.Debug.DrawLine(GetComponent<Rigidbody2D>().position, GetComponent<Rigidbody2D>().position + avoidanceForce, Color.blue);
       return avoidanceForce;
    }
 
@@ -86,13 +86,16 @@ public class SmartPlayerChaser : NpcBehaviour
          var forceFieldForce = (GetComponent<Rigidbody2D>().position - PlayerObject().GetComponent<Rigidbody2D>().position) * 1000;
 
          var attractionForce = Vector2.zero;
+
+         if(playerFlowField.Attractors != null)
          foreach (var attractor in playerFlowField.Attractors)
          {
             var force = (attractor - GetComponent<Rigidbody2D>().position).normalized * (attractor - GetComponent<Rigidbody2D>().position).sqrMagnitude*7.5f;
             attractionForce += force;
          }
+
          forceFieldForce += attractionForce;
-         if(_debug) Debug.DrawLine(GetComponent<Rigidbody2D>().position, GetComponent<Rigidbody2D>().position + attractionForce, Color.green);
+         if(Debug) UnityEngine.Debug.DrawLine(GetComponent<Rigidbody2D>().position, GetComponent<Rigidbody2D>().position + attractionForce, Color.green);
          return forceFieldForce;
       }
       return Vector2.zero;

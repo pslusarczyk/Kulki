@@ -29,7 +29,7 @@ public class PlayerHandColliding : MonoBehaviour {
          }
          foreach (var caughtBody in _caughtBodies)
          {
-            caughtBody.GetComponent<SmartPlayerChaser>().enabled = true;
+            if(caughtBody.GetComponent<SmartPlayerChaser>() != null ) caughtBody.GetComponent<SmartPlayerChaser>().enabled = true;
             Destroy(caughtBody.transform.GetChild(0).gameObject);
          }
          _caughtBodies = new List<Rigidbody2D>();
@@ -57,7 +57,7 @@ public class PlayerHandColliding : MonoBehaviour {
          }
 
          _caughtBodies.Add(body);
-         body.GetComponent<SmartPlayerChaser>().enabled = false;
+         if (body.GetComponent<SmartPlayerChaser>() != null) body.GetComponent<SmartPlayerChaser>().enabled = false;
          GameObject highlight = (GameObject)Instantiate(Resources.Load("Prefabs/CatchedHighlight"),
             body.transform.position, Quaternion.identity);
          highlight.transform.parent = body.transform;

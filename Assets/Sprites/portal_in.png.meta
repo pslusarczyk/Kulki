@@ -1,0 +1,199 @@
+fileFormatVersion: 2
+guid: 745238e37a14f7e4fa103d30960054c0
+timeCreated: 1465057804
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: portal_in_0
+    21300002: portal_in_1
+    21300004: portal_in_2
+    21300006: portal_in_3
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: portal_in_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 0
+        width: 255
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 122.5, y: 71.5}
+        - {x: 93.5, y: 106.5}
+        - {x: 75.5, y: 117.5}
+        - {x: 48.5, y: 127.5}
+        - {x: -31.5, y: 127.5}
+        - {x: -43.5, y: 123.5}
+        - {x: -56.5, y: 124.5}
+        - {x: -89.5, y: 104.5}
+        - {x: -127.5, y: 38.5}
+        - {x: -127.5, y: -40.5}
+        - {x: -124.5, y: -58.5}
+        - {x: -113.5, y: -73.5}
+        - {x: -75.5, y: -114.5}
+        - {x: -32.5, y: -127.5}
+        - {x: 65.5, y: -127.5}
+        - {x: 102.5, y: -105.5}
+        - {x: 127.5, y: -59.5}
+        - {x: 127.5, y: 66.5}
+    - name: portal_in_1
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 0
+        width: 252
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 126, y: -17.5}
+        - {x: 126, y: 51.5}
+        - {x: 98, y: 98.5}
+        - {x: 58, y: 127.5}
+        - {x: -44, y: 127.5}
+        - {x: -46, y: 124.5}
+        - {x: -67, y: 113.5}
+        - {x: -92, y: 102.5}
+        - {x: -96, y: 87.5}
+        - {x: -126, y: 50.5}
+        - {x: -126, y: -41.5}
+        - {x: -121, y: -56.5}
+        - {x: -107, y: -87.5}
+        - {x: -58, y: -126.5}
+        - {x: -49, y: -127.5}
+        - {x: 32, y: -127.5}
+        - {x: 55, y: -122.5}
+        - {x: 86, y: -111.5}
+        - {x: 118, y: -68.5}
+      - - {x: 87, y: -95.5}
+        - {x: 82, y: -98.5}
+        - {x: 82, y: -103.5}
+        - {x: 83, y: -105.5}
+        - {x: 91, y: -105.5}
+        - {x: 95, y: -101.5}
+        - {x: 95, y: -96.5}
+        - {x: 94, y: -95.5}
+      - - {x: -57, y: 120.5}
+        - {x: -59, y: 118.5}
+        - {x: -59, y: 115.5}
+        - {x: -57, y: 113.5}
+        - {x: -54, y: 113.5}
+        - {x: -52, y: 115.5}
+        - {x: -52, y: 118.5}
+        - {x: -54, y: 120.5}
+    - name: portal_in_2
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 0
+        width: 252
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 126, y: -35}
+        - {x: 126, y: 44}
+        - {x: 108, y: 101}
+        - {x: 64, y: 114}
+        - {x: 31, y: 129}
+        - {x: -55, y: 129}
+        - {x: -81, y: 113}
+        - {x: -90, y: 103}
+        - {x: -89, y: 99}
+        - {x: -107, y: 76}
+        - {x: -123, y: 47}
+        - {x: -126, y: 34}
+        - {x: -126, y: -44}
+        - {x: -122, y: -68}
+        - {x: -97, y: -105}
+        - {x: -50, y: -129}
+        - {x: 74, y: -129}
+        - {x: 91, y: -117}
+        - {x: 124, y: -43}
+    - name: portal_in_3
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 0
+        width: 255
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 73.5, y: -109}
+        - {x: 71.5, y: -110}
+        - {x: 72.5, y: -109}
+        - {x: 77.5, y: -107}
+        - {x: 83.5, y: -104}
+        - {x: 92.5, y: -99}
+        - {x: 104.5, y: -88}
+        - {x: 101.5, y: -78}
+        - {x: 96.5, y: -79}
+        - {x: 92.5, y: -83}
+        - {x: 114.5, y: -61}
+        - {x: 127.5, y: -65}
+        - {x: 127.5, y: 81}
+        - {x: 76.5, y: 129}
+        - {x: -76.5, y: 129}
+        - {x: -127.5, y: 109}
+        - {x: -127.5, y: -121}
+        - {x: -98.5, y: -129}
+        - {x: 64.5, y: -129}
+        - {x: 106.5, y: -115}
+        - {x: 89.5, y: -105}
+        - {x: 79.5, y: -107}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,199 @@
+fileFormatVersion: 2
+guid: d6f39dfc66f54bc41a66ed6a416f28e0
+timeCreated: 1465057980
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: portal_out_0
+    21300002: portal_out_1
+    21300004: portal_out_2
+    21300006: portal_out_3
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: portal_out_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 255
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 127.5, y: 17}
+        - {x: 117.5, y: 39}
+        - {x: 109.5, y: 55}
+        - {x: 99.5, y: 66}
+        - {x: 108.5, y: 58}
+        - {x: 116.5, y: 59}
+        - {x: 120.5, y: 78}
+        - {x: 55.5, y: 129}
+        - {x: -28.5, y: 129}
+        - {x: -100.5, y: 106}
+        - {x: -127.5, y: 58}
+        - {x: -127.5, y: -41}
+        - {x: -121.5, y: -66}
+        - {x: -93.5, y: -100}
+        - {x: -89.5, y: -105}
+        - {x: -99.5, y: -114}
+        - {x: -60.5, y: -129}
+        - {x: 40.5, y: -129}
+        - {x: 107.5, y: -98}
+        - {x: 122.5, y: -56}
+        - {x: 127.5, y: -25}
+    - name: portal_out_1
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 0
+        width: 252
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 126, y: -61}
+        - {x: 126, y: 36}
+        - {x: 107, y: 76}
+        - {x: 91, y: 103}
+        - {x: 55, y: 129}
+        - {x: -35, y: 129}
+        - {x: -65, y: 116}
+        - {x: -104, y: 92}
+        - {x: -121, y: 61}
+        - {x: -126, y: 28}
+        - {x: -126, y: -47}
+        - {x: -112, y: -77}
+        - {x: -88, y: -117}
+        - {x: -73, y: -121}
+        - {x: -27, y: -129}
+        - {x: 38, y: -129}
+        - {x: 42, y: -128}
+        - {x: 53, y: -128}
+        - {x: 97, y: -107}
+    - name: portal_out_2
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 0
+        width: 252
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 111, y: 49.5}
+        - {x: 110, y: 53.5}
+        - {x: 113, y: 50.5}
+        - {x: 117, y: 50.5}
+        - {x: 120, y: 51.5}
+        - {x: 118, y: 63.5}
+        - {x: 94, y: 84.5}
+        - {x: 85, y: 90.5}
+        - {x: 97, y: 103.5}
+        - {x: 73, y: 127.5}
+        - {x: -75, y: 127.5}
+        - {x: -121, y: 117.5}
+        - {x: -126, y: 74.5}
+        - {x: -126, y: -47.5}
+        - {x: -120, y: -68.5}
+        - {x: -92, y: -96.5}
+        - {x: -81, y: -127.5}
+        - {x: 72, y: -127.5}
+        - {x: 126, y: -75.5}
+        - {x: 126, y: 49.5}
+      - - {x: -93, y: -95.5}
+        - {x: -95, y: -96.5}
+        - {x: -95, y: -101.5}
+        - {x: -91, y: -105.5}
+        - {x: -83, y: -105.5}
+        - {x: -82, y: -103.5}
+        - {x: -82, y: -97.5}
+        - {x: -86, y: -95.5}
+      - - {x: 54, y: 120.5}
+        - {x: 52, y: 118.5}
+        - {x: 52, y: 115.5}
+        - {x: 54, y: 113.5}
+        - {x: 57, y: 113.5}
+        - {x: 59, y: 115.5}
+        - {x: 59, y: 118.5}
+        - {x: 57, y: 120.5}
+    - name: portal_out_3
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 0
+        width: 255
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 113.5, y: -74.5}
+        - {x: 120.5, y: -65.5}
+        - {x: 127.5, y: -37.5}
+        - {x: 127.5, y: 30.5}
+        - {x: 126.5, y: 38.5}
+        - {x: 107.5, y: 72.5}
+        - {x: 96.5, y: 92.5}
+        - {x: 65.5, y: 117.5}
+        - {x: 29.5, y: 127.5}
+        - {x: -58.5, y: 127.5}
+        - {x: -82.5, y: 120.5}
+        - {x: -127.5, y: 67.5}
+        - {x: -127.5, y: -61.5}
+        - {x: -117.5, y: -84.5}
+        - {x: -66.5, y: -127.5}
+        - {x: 31.5, y: -127.5}
+        - {x: 76.5, y: -115.5}
+        - {x: 103.5, y: -78.5}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
